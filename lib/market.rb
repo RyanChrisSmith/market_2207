@@ -29,4 +29,6 @@ class Market
     result
   end
 
+
+
 end

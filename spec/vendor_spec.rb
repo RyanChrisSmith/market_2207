@@ -38,5 +38,19 @@ RSpec.describe Vendor do
     expect(@vendor.inventory).to eq({@item1 => 25, @item2 => 12})
   end
 
+  it 'can show potential revenue' do
+    @vendor1 = Vendor.new("Rocky Mountain Fresh")
+    @vendor2 = Vendor.new("Ba-Nom-a-Nom")
+    @vendor3 = Vendor.new("Palisade Peach Shack")
+    @vendor1.stock(@item1, 35)
+    @vendor1.stock(@item2, 7)
+    @vendor2.stock(@item4, 50)
+    @vendor2.stock(@item3, 25)
+    @vendor3.stock(@item1, 65)
+    expect(@vendor1.potential_revenue).to eq 29.75
+    expect(@vendor2.potential_revenue).to eq 345.00
+    expect(@vendor3.potential_revenue).to eq 48.75
+  end
+
 
 end
