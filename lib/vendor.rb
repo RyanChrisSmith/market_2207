@@ -24,11 +24,7 @@ class Vendor
   end
 
   def potential_revenue
-    sum_of_all = 0
-    @inventory.each do |item|
-      sum_of_all += ((item[0].price.delete('$').to_f) * item[1])
-    end
-    sum_of_all
+    @inventory.sum{|item| (item[0].price.delete('$').to_f) * item[1]}
   end
 
 end
