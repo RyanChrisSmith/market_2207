@@ -29,6 +29,15 @@ class Market
     result
   end
 
+  # def total_inventory
+  #   @vendors.map do |vendor|
+  #     vendor.inventory.each do |item|
+  #       {
+  #         item[0] => {quantity: item[1], vendors: vendors_that_sell(item)}
+  #       }
+  #     end
+  #   end
+  # end
 
 
 end
