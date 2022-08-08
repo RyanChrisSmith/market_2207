@@ -30,10 +30,11 @@ class Market
   end
 
   def total_inventory
-    result = Hash.new()
+    result = Hash.new{|h,k| h[k] = {quantity: 0, vendors: [] }}
     @vendors.each do |vendor|
-      vendor.inventory.keys.each do |key|
-        result[key] = {quantity: item_quantity(key), vendors: item_vendor(key)}
+      vendor.inventory.each do |item, quantity|
+        result[item][:quantity] += quantity
+        result[item][:vendors] << vendor
       end
     end
     result

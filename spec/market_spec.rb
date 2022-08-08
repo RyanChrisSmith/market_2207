@@ -79,7 +79,7 @@ RSpec.describe Market do
     expect(@market.total_inventory).to eq({@item1 => {quantity: 100, vendors: [@vendor1, @vendor2]}, @item2 => {quantity: 7, vendors: [@vendor1]}, @item4 => {quantity: 50, vendors: [@vendor2]}, @item3 => {quantity: 35, vendors: [@vendor2, @vendor3]}})
   end
 
-  xit 'can show if item is overstocked' do
+  it 'can show if item is overstocked' do
     @vendor1.stock(@item1, 35)
     @vendor1.stock(@item2, 7)
     @vendor2.stock(@item4, 50)
