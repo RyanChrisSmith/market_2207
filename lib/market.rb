@@ -1,10 +1,12 @@
 class Market
   attr_reader :name,
-              :vendors
+              :vendors,
+              :date
 
   def initialize(name)
     @name = name
     @vendors = []
+    @date = Date.today.strftime('%d/%m/%Y')
   end
 
   def add_vendor(vendor)
@@ -58,6 +60,20 @@ class Market
       end
     end
     sorted.uniq.sort
+  end
+
+  def sell(item, quantity)
+    if total_inventory[item] && total_inventory[item][:quantity] > quantity
+      total_inventory[item][:vendors].each do |vendor|
+        until quantity.zero? || vendor.inventory[item].zero?
+          vendor.inventory[item] -= 1
+          quantity -= 1
+        end
+      end
+      true
+    else
+      false
+    end
   end
 
 end

@@ -104,4 +104,28 @@ RSpec.describe Market do
     @market.add_vendor(@vendor3)
     expect(@market.sorted_item_list).to eq(["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"])
   end
+
+  it 'can shows todays date' do
+    allow_any_instance_of(Market).to receive(:date).and_return('08/08/2022')
+    expect(@market.date).to eq('08/08/2022')
+  end
+
+  it 'can sell items from inventory' do
+    @item5 = Item.new({name: 'Onion', price: '$0.25'})
+    @vendor1.stock(@item1, 35)
+    @vendor1.stock(@item2, 7)
+    @vendor2.stock(@item4, 50)
+    @vendor2.stock(@item3, 25)
+    @vendor3.stock(@item1, 65)
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+    expect(@market.sell(@item1, 200)).to be false
+    expect(@market.sell(@item5, 1)).to be false
+    expect(@market.sell(@item4, 5)).to be true
+    expect(@vendor2.check_stock(@item4)).to eq 45
+    expect(@market.sell(@item1, 40)).to be true
+    expect(@vendor1.check_stock(@item1)).to eq 0
+    expect(@vendor3.check_stock(@item1)).to eq 60
+  end
 end
