@@ -10,4 +10,13 @@ class Market
   def add_vendor(vendor)
     @vendors << vendor
   end
+
+  def vendor_names
+    result = []
+    @vendors.each do |vendor|
+      result << vendor.name
+    end
+    result
+  end
+
 end
