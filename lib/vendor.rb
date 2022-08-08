@@ -15,4 +15,12 @@ class Vendor
     end
   end
 
+  def stock(item, quantity)
+    if @inventory.has_key?(item)
+      @inventory[item] += quantity
+    else
+      @inventory[item] = quantity
+    end
+  end
+
 end
