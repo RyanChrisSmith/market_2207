@@ -12,4 +12,8 @@ RSpec.describe Vendor do
     expect(@vendor).to be_a(Vendor)
   end
 
+  it 'has attributes' do
+    expect(@vendor.name).to eq 'Rocky Mountain Fresh'
+  end
+
 end
