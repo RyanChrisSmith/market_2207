@@ -29,15 +29,34 @@ class Market
     result
   end
 
-  # def total_inventory
-  #   @vendors.map do |vendor|
-  #     vendor.inventory.each do |item|
-  #       {
-  #         item[0] => {quantity: item[1], vendors: vendors_that_sell(item)}
-  #       }
-  #     end
-  #   end
-  # end
+  def total_inventory
+    result = Hash.new()
+    @vendors.each do |vendor|
+      vendor.inventory.keys.each do |key|
+        result[key] = {quantity: item_quantity(key), vendors: item_vendor(key)}
+      end
+    end
+    result
+  end
 
+  def overstocked_items
+    two_or_more_vendors = []
+    @vendors.each do |vendor|
+      vendor.inventory.each do |item|
+        if vendor.check_stock(item[0])
+        end
+      end
+    end
+  end
+
+  def sorted_item_list
+    sorted = []
+    @vendors.flat_map do |vendor|
+      vendor.inventory.each do |item, quanity|
+        sorted << item.name
+      end
+    end
+    sorted.uniq.sort
+  end
 
 end
