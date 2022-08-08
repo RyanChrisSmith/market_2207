@@ -1,2 +1,5 @@
 class Market
+
+
+
 end
