@@ -6,4 +6,6 @@ class Vendor
     @name = name
     @inventory = {}
   end
+
+
 end
