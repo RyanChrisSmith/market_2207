@@ -41,19 +41,19 @@ class Market
   end
 
   def overstocked_items
-    two_or_more_vendors = []
-    @vendors.each do |vendor|
-      vendor.inventory.each do |item|
-        if vendor.check_stock(item[0])
-        end
+    result = []
+    total_inventory.each do |item, vendor|
+      if vendor.length > 1 && vendor[:quantity] > 50
+        result << item
       end
     end
+    result
   end
 
   def sorted_item_list
     sorted = []
     @vendors.flat_map do |vendor|
-      vendor.inventory.each do |item, quanity|
+      vendor.inventory.each do |item, quantity|
         sorted << item.name
       end
     end
