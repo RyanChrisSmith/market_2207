@@ -6,6 +6,8 @@ RSpec.describe Vendor do
 
   before :each do
     @vendor = Vendor.new("Rocky Mountain Fresh")
+    @item1 = Item.new({name: 'Peach', price: "$0.75"})
+    @item2 = Item.new({name: 'Tomato', price: '$0.50'})
   end
 
   it 'exists' do
@@ -24,6 +26,9 @@ RSpec.describe Vendor do
     expect(@vendor.check_stock(@item1)).to eq 0
   end
 
-  it
+  it 'can stock an item and quantity and then show inventory' do
+    @vendor.stock(@item1, 30)
+    expect(@vendor.stock).to eq({@item1 => 30})
+  end
 
 end
